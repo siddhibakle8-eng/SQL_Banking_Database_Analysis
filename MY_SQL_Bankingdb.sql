@@ -1,7 +1,7 @@
-CREATE DATABASE BankingDb;
-USE BankingDb;
+CREATE DATABASE Banking_db;
+USE Banking_db;
 CREATE TABLE Customers (
-   CustomerID INT PRIMARY KEY,
+    CustomerID INT PRIMARY KEY,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),
     Email VARCHAR(100),
@@ -9,13 +9,22 @@ CREATE TABLE Customers (
     AccountCreationDate DATE
 );
 SHOW DATABASES;
-DESC Customer;
+DESC Customers;
+
 CREATE TABLE Accounts (
     AccountID INT PRIMARY KEY,
     CustomerID INT,
     AccountType VARCHAR(20),
     Balance DECIMAL(10,2),
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID) );
+    
+    CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY,
+    AccountID INT,
+    TransactionDate DATE,
+    Amount DECIMAL(10,2),
+    TransactionType VARCHAR(20),
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID) );
     
     CREATE TABLE Branches (
 	BranchID INT PRIMARY KEY,
@@ -41,3 +50,22 @@ CREATE TABLE Loans (
     EndDate DATE,
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
+
+USE Banking_db;
+ALTER TABLE Customers
+ADD DateOfBirth DATE;
+
+ALTER TABLE Customers
+MODIFY Phone VARCHAR(20);
+
+ALTER TABLE Accounts
+ADD CONSTRAINT chk_MinBalance
+CHECK (Balance >= 1000);
+DROP TABLE AccountBranches;
+
+ALTER TABLE Customers
+MODIFY FirstName VARCHAR(50) NOT NULL;
+
+ALTER TABLE Customers
+ADD CONSTRAINT uq_Email UNIQUE (Email);
+DESC Customers;
