@@ -234,7 +234,39 @@ WHERE TransactionType IN ('Deposit','Withdrawal')
 ORDER BY TransactionDate DESC;
 
 
+USE Pizza_sales_analysis;
+
+SELECT SUM(Balance) as Total_Balance FROM Accounts;
+
+SELECT SUM(Balance) as Total_Balance FROM Accounts
+WHERE AccountType = "Savings";
+
+SELECT max(Balance) as Highest_Balance
+ FROM Accounts;
+ 
+ SELECT min(Balance) as Lowest_Balance
+ FROM Accounts;
+ 
+ SELECT count(*) as Total_Customer
+ FROM Customers;
+ 
+ SELECT AccountType, SUM(Balance) as Total_Balance
+ FROM Accounts Group By AccountType;
+ SELECT AccountType, max(balance) as Total_Balance
+ FROM Accounts Group By AccountType;
+ 
+ SELECT AccountType, Balance FROM Accounts
+ WHERE Balance >= 25000;
+ 
+ SELECT AccountType, SUM(Balance) as Total_Balance FROM Accounts
+ Group By AccountType
+ having sum(Balance) > 25000;
+ 
+ 
 
 
+
+SELECT avg(Balance) as Average_Balance
+ FROM Accounts;
 
 
